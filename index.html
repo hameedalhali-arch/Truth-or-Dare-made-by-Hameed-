@@ -7,7 +7,7 @@
 body {
     font-family: Arial, sans-serif;
     background: #add8e6; /* lichtblauw */
-    color: #000; /* zwarte tekst op lichtblauw */
+    color: #000;
     text-align: center;
     padding: 20px;
     height: 100vh;
@@ -33,14 +33,16 @@ button:hover { transform: scale(1.1); }
 #settings { background-color: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; display:none;}
 #setup, #game, #intro { display:none; }
 input { border-radius: 8px; padding: 10px; font-size:18px; width:250px; text-align:center;}
-#result { font-size: 22px; margin-top:20px; min-height:80px; }
+#result { font-size: 22px; margin-top:20px; min-height:80px; max-width:80%; word-wrap: break-word; }
 </style>
 </head>
 
 <body>
 
+<!-- Muziek -->
 <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay loop></audio>
 
+<!-- Intro -->
 <div id="intro">
     <h1>🎮 Truth or Dare</h1>
     <h2>This game is made by Hameed Al Msari</h2>
@@ -79,26 +81,40 @@ input { border-radius: 8px; padding: 10px; font-size:18px; width:250px; text-ali
 </div>
 
 <script>
+// Variabelen
 let lang = "en";
 let players = [];
 let turn = 0;
 
-// Truths & Dares (zelfde voor alle talen voorlopig)
+// Truth & Dare arrays (50+ items)
 const truthsArray = [
 "What's your biggest secret?", "Who do you have a crush on?", "Have you ever lied to your best friend?", "What's your weirdest habit?",
 "What's the most embarrassing thing you've done?", "Have you ever cheated in a game?", "What's your secret talent?", "What's your biggest fear?",
 "Have you ever told a lie to your parents?", "What's the last thing you searched online?", "What's your guilty pleasure?", "What's your childhood dream?",
 "Have you ever stolen something?", "Who do you secretly admire?", "What's your weirdest dream?", "What's your most awkward moment?", "Have you ever broken something and blamed someone else?",
 "What's a secret no one knows?", "Who was your first crush?", "What's the worst lie you've told?", "What's the funniest thing that happened to you?", "Have you ever faked being sick?",
-"What's a habit you can't stop?", "What's your most embarrassing photo?", "Have you ever cried in public?", "What's your weirdest fear?", "What's your biggest regret?"
+"What's a habit you can't stop?", "What's your most embarrassing photo?", "Have you ever cried in public?", "What's your weirdest fear?", "What's your biggest regret?",
+"What's the silliest thing you've done?", "Who do you pretend to like but don’t?", "What's your weirdest nickname?", "What's your funniest lie?", "Have you ever peed in a pool?",
+"What's the strangest food you've tried?", "Who would you kiss from your friend group?", "What's the weirdest thing you've said to a teacher?", "What's your weirdest habit at school?",
+"What's the longest you've gone without showering?", "What's your most childish habit?", "What's a habit you regret?", "Who do you secretly dislike?", "What's your funniest conversation?",
+"What's your weirdest talent?", "Have you ever blamed someone unfairly?", "What's your favorite embarrassing memory?", "What's your most ridiculous fear?", "What's your favorite guilty pleasure song?"
 ];
 
 const daresArray = [
 "Do 10 jumping jacks", "Talk in a funny accent for 1 minute", "Post a silly selfie", "Do a funny dance", "Sing a song loudly",
 "Text your crush something funny", "Act like an animal for 1 minute", "Do 5 push-ups", "Imitate a celebrity", "Draw something silly",
-"Walk like a chicken for 30 seconds", "Speak in rhyme for 1 minute", "Try to lick your elbow", "Spin around 10 times", "Do 20 squats"
+"Walk like a chicken for 30 seconds", "Speak in rhyme for 1 minute", "Try to lick your elbow", "Spin around 10 times", "Do 20 squats",
+"Balance on one leg for 30 seconds", "Do a silly pose and take a picture", "Pretend to be a robot for 1 minute", "Sing the alphabet backwards",
+"Do 15 burpees", "Make a funny face and hold for 10 seconds", "Wear socks on your hands for 1 minute", "Do a cartwheel or attempt one",
+"Try to say tongue twisters 3 times", "Hop like a frog across the room", "Draw a mustache on your face", "Call a friend and speak only in song",
+"Dance without music for 1 minute", "Pretend to be a superhero", "Do a silly handshake with someone", "Spin around 5 times with eyes closed",
+"Pretend your shoe is a phone and talk", "Say the alphabet backwards fast", "Make animal sounds for 30 seconds", "Try a weird food combination",
+"Do 10 push-ups with a friend counting", "Speak only in questions for 1 minute", "Hop on one foot while singing", "Wear sunglasses indoors for 1 minute",
+"Do 20 jumping jacks with eyes closed", "Pretend to be invisible and sneak around", "Do a funny walk across the room", "Sing your favorite song in a silly voice",
+"Draw something blindfolded", "Do 5 push-ups on one leg"
 ];
 
+// Alle talen gebruiken voorlopig dezelfde vragen/dares
 const data = {
 en:{title:"Truth or Dare Mega", p1:"Player 1 name:", p2:"Player 2 name:", start:"Start", truth:"Truth", dare:"Dare", next:"Next", turn:"Turn:", truths: truthsArray, dares: daresArray},
 fr:{title:"Action ou Vérité", p1:"Nom joueur 1:", p2:"Nom joueur 2:", start:"Commencer", truth:"Vérité", dare:"Action", next:"Suivant", turn:"Tour:", truths: truthsArray, dares: daresArray},
@@ -107,6 +123,7 @@ sv:{title:"Sanning eller Konsekvens", p1:"Spelare 1 namn:", p2:"Spelare 2 namn:"
 ar:{title:"الحقيقة أم الجرأة", p1:"اسم اللاعب 1:", p2:"اسم اللاعب 2:", start:"ابدأ", truth:"الحقيقة", dare:"الجرأة", next:"التالي", turn:"دور:", truths: truthsArray, dares: daresArray}
 };
 
+// Functies
 function goToSetup(){intro.style.display="none";setup.style.display="block";}
 function applyLanguage(){
 title.innerText=data[lang].title;
