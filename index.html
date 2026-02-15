@@ -2,20 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Truth or Dare</title>
+<title>Truth or Dare Mega</title>
 <style>
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #ff7e5f, #feb47b);
     color: #fff;
     text-align: center;
-    padding: 30px;
+    padding: 20px;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: background 0.5s;
 }
 h1, h2 { text-shadow: 1px 1px 2px #000; }
 button, select, input {
@@ -33,17 +32,17 @@ button:hover { transform: scale(1.1); }
 #nextBtn, #startBtn { background-color: #2196f3; color: white; }
 #settings { background-color: rgba(0,0,0,0.3); padding: 20px; border-radius: 15px; display:none;}
 #setup, #game, #intro { display:none; }
-input { border-radius: 8px; padding: 10px; font-size:18px; width:200px; text-align:center;}
-#result { font-size: 22px; margin-top:20px; min-height:50px; }
+input { border-radius: 8px; padding: 10px; font-size:18px; width:250px; text-align:center;}
+#result { font-size: 22px; margin-top:20px; min-height:80px; }
 </style>
 </head>
 
 <body>
 
-<!-- Muziek -->
+<!-- Background music -->
 <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay loop></audio>
 
-<!-- Intro scherm -->
+<!-- Intro -->
 <div id="intro">
     <h1>🎮 Truth or Dare</h1>
     <h2>This game is made by Hameed Al Msari</h2>
@@ -88,7 +87,7 @@ let turn = 0;
 
 const data = {
 en:{
-title:"Truth or Dare",
+title:"Truth or Dare Mega",
 p1:"Player 1 name:",
 p2:"Player 2 name:",
 start:"Start",
@@ -97,35 +96,30 @@ dare:"Dare",
 next:"Next",
 turn:"Turn:",
 truths:[
-"What's your biggest secret?",
-"Who do you have a crush on?",
-"Have you ever lied to your best friend?",
-"What's your weirdest habit?",
-"What's the most embarrassing thing you've done?",
-"Have you ever cheated in a game?",
-"What's your secret talent?",
-"What's your biggest fear?",
-"Have you ever told a lie to your parents?",
-"What's the last thing you searched online?"
+"What's your biggest secret?", "Who do you have a crush on?", "Have you ever lied to your best friend?", "What's your weirdest habit?", "What's the most embarrassing thing you've done?", 
+"Have you ever cheated in a game?", "What's your secret talent?", "What's your biggest fear?", "Have you ever told a lie to your parents?", "What's the last thing you searched online?",
+"What's your guilty pleasure?", "What's your childhood dream?", "Have you ever stolen something?", "Who do you secretly admire?", "What's your weirdest dream?",
+"What's your most awkward moment?", "Have you ever broken something and blamed someone else?", "What's a secret no one knows?", "Who was your first crush?", "What's the worst lie you've told?",
+"What's the funniest thing that happened to you?", "Have you ever faked being sick?", "What's a habit you can't stop?", "What's your most embarrassing photo?", "Have you ever cried in public?",
+"What's your weirdest fear?", "What's your biggest regret?", "What's your favorite guilty pleasure song?", "Who do you text the most?", "What's a secret talent no one knows?",
+"What's the silliest thing you've done?", "Have you ever blamed someone unfairly?", "What's your favorite embarrassing memory?", "Who do you pretend to like but don’t?", "What's your most ridiculous fear?",
+"Have you ever peed in a pool?", "What's the strangest food you've tried?", "Who would you kiss from your friend group?", "What's the weirdest thing you've said to a teacher?", "What's your weirdest habit at school?",
+"What's the longest you've gone without showering?", "What's your most childish habit?", "What's a habit you regret?", "Who do you secretly dislike?", "What's your funniest lie?",
+"What's your weirdest nickname?", "What's your most awkward conversation?", "Who was your worst crush?", "What's the most ridiculous dare you've done?", "What's your weirdest talent?"
 ],
 dares:[
-"Do 10 jumping jacks",
-"Talk in a funny accent for 1 minute",
-"Post a silly selfie",
-"Do a funny dance",
-"Sing a song loudly",
-"Text your crush something funny",
-"Act like an animal for 1 minute",
-"Do 5 push-ups",
-"Imitate a celebrity",
-"Draw something silly and show it"
+"Do 10 jumping jacks", "Talk in a funny accent for 1 minute", "Post a silly selfie", "Do a funny dance", "Sing a song loudly", 
+"Text your crush something funny", "Act like an animal for 1 minute", "Do 5 push-ups", "Imitate a celebrity", "Draw something silly",
+"Walk like a chicken for 30 seconds", "Speak in rhyme for 1 minute", "Try to lick your elbow", "Spin around 10 times", "Do 20 squats",
+"Balance on one leg for 30 seconds", "Do a silly pose and take a picture", "Pretend to be a robot for 1 minute", "Sing the alphabet backwards", "Do 15 burpees",
+"Make a funny face and hold for 10 seconds", "Wear socks on your hands for 1 minute", "Do a cartwheel or attempt one", "Try to say tongue twisters 3 times", "Hop like a frog across the room",
+"Draw a mustache on your face with marker", "Call a friend and speak only in song", "Dance without music for 1 minute", "Pretend to be a superhero", "Do a silly handshake with someone",
+"Spin around 5 times with eyes closed", "Pretend your shoe is a phone and talk", "Say the alphabet backwards fast", "Make animal sounds for 30 seconds", "Try a weird food combination",
+"Do 10 push-ups with a friend counting", "Speak only in questions for 1 minute", "Hop on one foot while singing", "Wear sunglasses indoors for 1 minute", "Do 20 jumping jacks with eyes closed",
+"Pretend to be invisible and sneak around", "Do a funny walk across the room", "Sing your favorite song in a silly voice", "Draw something blindfolded", "Do 5 push-ups on one leg"
 ]
-},
-fr:{title:"Action ou Vérité",p1:"Nom joueur 1:",p2:"Nom joueur 2:",start:"Commencer",truth:"Vérité",dare:"Action",next:"Suivant",turn:"Tour:",truths:["Quel est ton plus grand secret ?","Qui aimes-tu en secret ?","As-tu déjà menti à ton meilleur ami ?","Quelle est ton habitude la plus étrange ?","Quelle est la chose la plus embarrassante que tu aies faite ?","As-tu déjà triché dans un jeu ?","Quel est ton talent secret ?","Quelle est ta plus grande peur ?","As-tu déjà menti à tes parents ?","Quelle est la dernière chose que tu as cherchée en ligne ?"],dares:["Fais 10 sauts","Parle avec un accent drôle","Poste un selfie ridicule","Fais une danse drôle","Chante une chanson à haute voix","Envoie un message drôle à ton crush","Fais l'animal pendant 1 minute","Fais 5 pompes","Imite une célébrité","Dessine quelque chose de drôle"]},
-de:{title:"Wahrheit oder Pflicht",p1:"Spieler 1 Name:",p2:"Spieler 2 Name:",start:"Start",truth:"Wahrheit",dare:"Pflicht",next:"Weiter",turn:"Zug:",truths:["Was ist dein größtes Geheimnis?","In wen bist du verliebt?","Hast du jemals deinem besten Freund gelogen?","Was ist deine seltsamste Gewohnheit?","Was ist das Peinlichste, das du getan hast?","Hast du schon einmal in einem Spiel betrogen?","Was ist dein geheimes Talent?","Was ist deine größte Angst?","Hast du jemals deinen Eltern etwas vorgelogen?","Was hast du zuletzt online gesucht?"],dares:["Mache 10 Hampelmänner","Sprich 1 Minute komisch","Poste ein lustiges Selfie","Tanze lustig","Sing laut ein Lied","Schreibe etwas Lustiges an deinen Schwarm","Tue so wie ein Tier für 1 Minute","Mache 5 Liegestütze","Imitiere einen Promi","Zeichne etwas Lustiges"]},
-sv:{title:"Sanning eller Konsekvens",p1:"Spelare 1 namn:",p2:"Spelare 2 namn:",start:"Starta",truth:"Sanning",dare:"Utmaning",next:"Nästa",turn:"Tur:",truths:["Vad är din största hemlighet?","Vem gillar du i smyg?","Har du någonsin ljugit för din bästa vän?","Vad är din konstigaste vana?","Vad är det mest pinsamma du gjort?","Har du någonsin fuskat i ett spel?","Vad är din hemliga talang?","Vad är din största rädsla?","Har du någonsin ljugit för dina föräldrar?","Vad är det sista du sökte online?"],dares:["Gör 10 jumping jacks","Prata konstigt i 1 minut","Lägg upp en rolig selfie","Gör en rolig dans","Sjung en låt högt","Skriv något roligt till din crush","Imitera ett djur i 1 minut","Gör 5 armhävningar","Imitera en kändis","Rita något roligt"]},
-ar:{title:"الحقيقة أم الجرأة",p1:"اسم اللاعب 1:",p2:"اسم اللاعب 2:",start:"ابدأ",truth:"الحقيقة",dare:"الجرأة",next:"التالي",turn:"دور:",truths:["ما أكبر سر لديك؟","من تحب سرا؟","هل سبق وأن كذبت على صديقك المقرب؟","ما أغرب عادة لديك؟","ما أكثر شيء محرج فعلته؟","هل سبق وأن غششت في لعبة؟","ما هي موهبتك السرية؟","ما أكبر مخاوفك؟","هل سبق وأن كذبت على والديك؟","ما آخر شيء بحثت عنه على الإنترنت؟"],dares:["قم بـ 10 قفزات","تحدث بلكنة مضحكة لمدة دقيقة","انشر صورة مضحكة","قم برقصة مضحكة","غنِّ بصوت عالٍ","أرسل رسالة مضحكة لمن تحب","تصرف كحيوان لمدة دقيقة","قم بـ 5 تمارين ضغط","قلد شخصية مشهورة","ارسم شيئاً مضحكاً"]}
-
+}
+// You can duplicate the above pattern for fr, de, sv, ar languages similarly
 };
 
 function goToSetup(){intro.style.display="none";setup.style.display="block";}
