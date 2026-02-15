@@ -1,0 +1,180 @@
+<!DOCTYPE html>  
+<html lang="nl">  
+<head>  
+<meta charset="UTF-8">  
+<title>Truth or Dare</title>  
+<style>  
+body {  
+    font-family: Arial;  
+    background: #1e1e1e;  
+    color: white;  
+    text-align: center;  
+    padding: 30px;  
+}  
+button, select, input {  
+    padding: 10px;  
+    margin: 5px;  
+    font-size: 16px;  
+}  
+#intro, #game, #settings, #setup { display: none; }  
+</style>  
+</head>  
+  
+<body>  
+  
+<div id="intro">  
+    <h1>🎮 Truth or Dare</h1>  
+    <h2>This game is made by Hameed Al Msari</h2>  
+    <button onclick="goToSetup()">Next</button>  
+</div>  
+  
+<h1 id="title"></h1>  
+<button onclick="openSettings()">⚙️ Settings</button>  
+  
+<div id="settings">  
+    <h2>Language</h2>  
+    <select onchange="changeLanguage(this.value)">  
+        <option value="en">English</option>  
+        <option value="fr">Français</option>  
+        <option value="de">Deutsch</option>  
+        <option value="sv">Svenska</option>  
+    </select><br>  
+    <button onclick="closeSettings()">Close</button>  
+</div>  
+  
+<div id="setup">  
+    <p id="p1text"></p>  
+    <input id="p1">  
+    <p id="p2text"></p>  
+    <input id="p2"><br><br>  
+    <button onclick="startGame()" id="startBtn"></button>  
+</div>  
+  
+<div id="game">  
+    <h2 id="turn"></h2>  
+    <button onclick="truth()" id="truthBtn"></button>  
+    <button onclick="dare()" id="dareBtn"></button>  
+    <p id="result"></p>  
+    <button onclick="next()" id="nextBtn"></button>  
+</div>  
+  
+<script>  
+let lang = "en";  
+let players = [];  
+let turn = 0;  
+  
+const data = {  
+en: {  
+title: "Truth or Dare",  
+p1: "Player 1 name:",  
+p2: "Player 2 name:",  
+start: "Start",  
+truth: "Truth",  
+dare: "Dare",  
+next: "Next",  
+turn: "Turn:",  
+truths: ["What is your biggest secret?","Who do you have a crush on?"],  
+dares: ["Do 10 jumping jacks","Talk in a funny accent for 1 minute"]  
+},  
+fr: {  
+title: "Action ou Vérité",  
+p1: "Nom joueur 1:",  
+p2: "Nom joueur 2:",  
+start: "Commencer",  
+truth: "Vérité",  
+dare: "Action",  
+next: "Suivant",  
+turn: "Tour:",  
+truths: ["Quel est ton plus grand secret ?","Qui aimes-tu en secret ?"],  
+dares: ["Fais 10 sauts","Parle avec un accent drôle"]  
+},  
+de: {  
+title: "Wahrheit oder Pflicht",  
+p1: "Spieler 1 Name:",  
+p2: "Spieler 2 Name:",  
+start: "Start",  
+truth: "Wahrheit",  
+dare: "Pflicht",  
+next: "Weiter",  
+turn: "Zug:",  
+truths: ["Was ist dein größtes Geheimnis?","In wen bist du verliebt?"],  
+dares: ["Mache 10 Hampelmänner","Sprich 1 Minute komisch"]  
+},  
+sv: {  
+title: "Sanning eller Konsekvens",  
+p1: "Spelare 1 namn:",  
+p2: "Spelare 2 namn:",  
+start: "Starta",  
+truth: "Sanning",  
+dare: "Utmaning",  
+next: "Nästa",  
+turn: "Tur:",  
+truths: ["Vad är din största hemlighet?","Vem gillar du i smyg?"],  
+dares: ["Gör 10 jumping jacks","Prata konstigt i 1 minut"]  
+}  
+};  
+  
+function goToSetup(){  
+intro.style.display = "none";  
+setup.style.display = "block";  
+}  
+  
+function applyLanguage() {  
+title.innerText = data[lang].title;  
+p1text.innerText = data[lang].p1;  
+p2text.innerText = data[lang].p2;  
+startBtn.innerText = data[lang].start;  
+truthBtn.innerText = data[lang].truth;  
+dareBtn.innerText = data[lang].dare;  
+nextBtn.innerText = data[lang].next;  
+updateTurn();  
+}  
+  
+function changeLanguage(l) {  
+lang = l;  
+applyLanguage();  
+}  
+  
+function openSettings() {  
+settings.style.display = "block";  
+}  
+  
+function closeSettings() {  
+settings.style.display = "none";  
+}  
+  
+function startGame() {  
+players = [p1.value, p2.value];  
+setup.style.display = "none";  
+game.style.display = "block";  
+updateTurn();  
+}  
+  
+function updateTurn() {  
+if (players.length > 0)  
+turnText = data[lang].turn + " " + players[turn];  
+document.getElementById("turn").innerText = turnText || "";  
+result.innerText = "";  
+}  
+  
+function truth() {  
+result.innerText =  
+data[lang].truths[Math.floor(Math.random() * data[lang].truths.length)];  
+}  
+  
+function dare() {  
+result.innerText =  
+data[lang].dares[Math.floor(Math.random() * data[lang].dares.length)];  
+}  
+  
+function next() {  
+turn = (turn + 1) % 2;  
+updateTurn();  
+}  
+  
+intro.style.display = "block";  
+applyLanguage();  
+</script>  
+  
+</body>  
+</html>  
